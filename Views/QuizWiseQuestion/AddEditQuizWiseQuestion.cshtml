@@ -1,0 +1,58 @@
+﻿@model Quiz_Management.Models.QuizWiseQuestionModel
+<main id="main" class="main">
+    <div class="container-fluid">
+        <h2 style="color:steelblue" class="card-title fs-2">Quiz Wise Questions Add/Edit</h2>
+        <div class="card">
+            <div class="card-body">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb mt-3">
+                        <li class="breadcrumb-item">
+                            <a asp-controller="QuizWiseQuestion" asp-action="QuizWiseQuestionList">Quiz Wise Question</a>
+                        </li>
+                        <li class="breadcrumb-item active">Quiz Wise Questions Add</li>
+                    </ol>
+                </nav>
+                <form asp-controller="QuizWiseQuestion" asp-action="QuizWiseQuestionSave" method="post">
+                    <input hidden asp-for="QuizWiseQuestionsID" />
+                    <div class="mb-3">
+                        <span class="text-danger">*</span>
+                        <label for="quizId" class="form-label">Quiz ID</label>
+                        <select asp-for="QuizID" class="form-select" required>
+                            <option value="">-- Select Level --</option>
+                            @foreach (var level in ViewBag.Quiz)
+                            {
+                                <option value="@level.QuizID">@level.QuizName</option>
+                            }
+                        </select>
+                        <span asp-validation-for="QuizID" class="text text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <span class="text-danger">*</span>
+                        <label for="questionId" class="form-label">Question ID</label>
+                        <select asp-for="QuestionID" class="form-select" required>
+                            <option value="">-- Select Level --</option>
+                            @foreach (var level in ViewBag.Question)
+                            {
+                                <option value="@level.QuestionID">@level.QuestionText</option>
+                            }
+                        </select>
+                        <span asp-validation-for="QuestionID" class="text text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <span class="text-danger">*</span>
+                        <label for="userId" class="form-label">User ID</label>
+                        <input asp-for="UserID" class="form-control">
+                    </div>
+
+                    <button type="submit" class="btn btn-success me-2">Save</button>
+                    <button type="button" class="btn btn-danger">Reset</button>
+                    <a class="btn btn-warning ms-1" asp-controller="QuizWiseQuestion" asp-action="QuizWiseQuestionList">
+                        Back
+                    </a>
+                </form>
+            </div>
+        </div>
+    </div>
+</main>
